@@ -51,17 +51,17 @@ def save_messages_to_csv(messages, filename):
     try:
         with open(filename, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(['Name', 'Date', 'Message', 'Like Count', 'User ID', 'Liked By'])
+            writer.writerow(['Name', 'Date', 'Message', 'Like Count', 'User ID', 'Liked By', 'Attachments'])
 
             for msg in messages:
                 name = msg['name']
-                # Convert timestamp to mm/dd/yyyy format
                 created_at = datetime.fromtimestamp(msg['created_at']).strftime('%m/%d/%Y')
                 text = msg['text']
                 like_count = len(msg['favorited_by'])
                 user_id = msg['user_id']
                 liked_by = ','.join(msg['favorited_by'])
-                writer.writerow([name, created_at, text, like_count, user_id, liked_by])
+                attachments = ';'.join([att['url'] for att in msg['attachments'] if 'url' in att])  
+                writer.writerow([name, created_at, text, like_count, user_id, liked_by, attachments])
     except Exception as e:
         print(f"Failed to save messages: {e}")
 
@@ -72,4 +72,3 @@ try:
 except Exception as e:
     print(f"An error occurred while fetching or saving messages: {e}")
     sys.exit(1)
-
