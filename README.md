@@ -34,4 +34,6 @@ curl -s -H "X-Access-Token: YOUR_ACCESS_TOKEN" "https://api.groupme.com/v3/group
 
 ```moreStat.py``` give the percentage of messages that have 0 likes and the message that has the most likes
 
+```NickNameChangeAndDate.py``` Shows top 10 most changed nickname and give total messages for each month and year
+
 Create a pull request or an issue to request more/diff stats
