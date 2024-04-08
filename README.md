@@ -15,3 +15,5 @@
 ```aver_char.py``` give the top 30 people who has the highest average character per message 
 
 ```GraphicalData.ipynb``` Make the graph for all these data in google colab and jupyter notebook
+
+Create a pull request or an issue to request more/diff stats
