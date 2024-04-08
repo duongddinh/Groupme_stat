@@ -15,6 +15,14 @@ curl -s -H "X-Access-Token: YOUR_ACCESS_TOKEN" "https://api.groupme.com/v3/group
 
 [Developer Portal](https://dev.groupme.com/)
 
+### Run The script:
+
+Add ```access_token = TOKEN_HERE``` and ```group_id = GROUP_ID_HERE``` to ```export_groupme_stat.py```
+
+and run:
+
+```python3 export_groupme_stat.py```
+
 ### File description
 
 ```export_groupme_stat.py``` downloads the entire group conversation into a CSV file, which includes Name, Date, Message, Like Count, User ID, Time, Liked By (a list of user IDs), and Attachments."
