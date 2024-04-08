@@ -1,9 +1,9 @@
 # Groupme stat
-Most comprehensive Groupme Groupchat csv generator
+Most Comprehensive GroupMe Group Chat CSV Generator
 
-This project allows you to download the entire groupme group chat into a csv file, which includes Name, Date, Message, Like Count, User Id, Time, Liked by (list of user_id(s)), and Attachments (```export_groupme_stat.py```)
+This project enables you to download the entire GroupMe group chat into a CSV file. The file includes columns for Name, Date, Message, Like Count, User ID, Time, Liked By (a list of user IDs), and Attachments (via ```export_groupme_stat.py```).
 
-I also provided some examples on how you can use the csv file to get the stats 
+I have also provided some examples of how you can use the CSV file to generate stats.
 
 ### Get group id: 
 
@@ -17,33 +17,32 @@ curl -s -H "X-Access-Token: YOUR_ACCESS_TOKEN" "https://api.groupme.com/v3/group
 
 ### File description
 
-```export_groupme_stat.py``` download the entire group converation into a csv file which includes Name, Date, Message, Like Count, User Id, Time, Liked by (list of user_id(s)), and Attachments
+```export_groupme_stat.py``` downloads the entire group conversation into a CSV file, which includes Name, Date, Message, Like Count, User ID, Time, Liked By (a list of user IDs), and Attachments."
 
 ### Example Stats
+```total_message.py``` gives the top 30 people who have sent the most messages.
 
-```total_message.py``` give top 30 people who have the most message sent
+```total_likes_received.py``` provides the top 30 people who have received the most likes.
 
-```total_likes_received.py ``` give top 30 people who were given the most likes
+```self_liked.py``` identifies the top 30 individuals who have self-liked their messages the most.
 
-```self_liked.py ``` give the top 30 who self-liked the most
+```likes_per_message.py``` calculates the ratio of likes per message and lists the top 30 people with the highest likes per message.
 
-```likes_per_message.py ``` give the ratio of likes per message and give top 30 people who have the most likes per message
+```like_sent.py``` displays the top 30 people who have given out the most likes.
 
-```like_sent.py ``` give top 30 people who have given the most likes
+```aver_char.py``` reveals the top 30 people with the highest average character count per message.
 
-```aver_char.py``` give the top 30 people who has the highest average character per message 
+```GraphicalData.ipynb``` generates graphs for all these data points in Google Colab and Jupyter Notebook.
 
-```GraphicalData.ipynb``` Make the graph for all these data in google colab and jupyter notebook
+```moreStat.py``` provides the percentage of messages that have received 0 likes and identifies the message that has received the most likes.
 
-```moreStat.py``` give the percentage of messages that have 0 likes and the message that has the most likes
+```NickNameChangeAndDate.py``` shows the top 10 nicknames that have been changed the most and provides the total number of messages for each month and year.
 
-```NickNameChangeAndDate.py``` Shows top 10 most changed nickname and give total messages for each month and year
+```removed_user.py``` highlights the top 10 users who have been removed from the group chat the most.
 
-```removed_user.py``` Shows the top 10 users got removed from the groupchat the most
+```LateTexter.py``` identifies the top 10 late texters (from 2 am to 4 am).
 
-```LateTexter.py``` Shows the top 10 late texters (from 2am to 4am)
-
-```mostEmojiAttachment.py``` Most emojis and attachements sent
+```mostEmojiAttachment.py``` identifies who has sent the most emojis and attachments.
 
 ## Dependencies:
 
@@ -67,4 +66,6 @@ import re
 
 do ```pip3 install [Name]```
 
-Create a pull request or an issue to request more/diff stats
+## More Stats
+
+Create a pull request or an issue to request additional or different statistics.
