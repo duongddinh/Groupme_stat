@@ -1,8 +1,6 @@
 import pandas as pd
 import requests
-import json
 
-# Your GroupMe access token and group ID
 access_token = ''
 group_id = ''
 
@@ -18,13 +16,10 @@ def get_nickname(user_id):
 
 df = pd.read_csv('groupme_chat_history.csv')
 
-df['Like Count'] = df['Like Count'].astype(int)
+message_counts = df.groupby('User ID')['User ID'].count()
+sorted_message_counts = message_counts.sort_values(ascending=False)
 
-likes_per_user = df.groupby('User ID')['Like Count'].sum()
-
-sorted_likes = likes_per_user.sort_values(ascending=False)
-
-for user_id in sorted_likes.head(30).index:
+for user_id in sorted_message_counts.head(30).index:
     nickname = get_nickname(user_id)
-    like_count = sorted_likes[user_id]
-    print(f"{nickname}: {like_count} likes")
+    message_count = sorted_message_counts[user_id]
+    print(f"{nickname}: {message_count} messages sent")

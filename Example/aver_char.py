@@ -1,8 +1,6 @@
 import pandas as pd
 import requests
-import json
 
-# Your GroupMe access token and group ID
 access_token = ''
 group_id = ''
 
@@ -18,13 +16,17 @@ def get_nickname(user_id):
 
 df = pd.read_csv('groupme_chat_history.csv')
 
-df['Like Count'] = df['Like Count'].astype(int)
+df['Message Length'] = df['Message'].apply(lambda x: len(str(x)))
 
-likes_per_user = df.groupby('User ID')['Like Count'].sum()
+agg_df = df.groupby('User ID')['Message Length'].mean().reset_index()
 
-sorted_likes = likes_per_user.sort_values(ascending=False)
+sorted_agg_df = agg_df.sort_values(by='Message Length', ascending=False)
 
-for user_id in sorted_likes.head(30).index:
+top_10_users = sorted_agg_df.head(30)
+
+print("Top 10 users by average characters per message:")
+for index, row in top_10_users.iterrows():
+    user_id = row['User ID']
+    avg_length = row['Message Length']
     nickname = get_nickname(user_id)
-    like_count = sorted_likes[user_id]
-    print(f"{nickname}: {like_count} likes")
+    print(f"{nickname} (User ID: {user_id}): {avg_length:.2f} characters/message")
