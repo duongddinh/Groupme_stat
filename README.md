@@ -1,6 +1,22 @@
 # Groupme stat
 
-```export_groupme_stat.py``` download the entire group converation into a csv file which include Name, Date, Message, Like Count, User Id, and Liked by (list of user_id(s))
+This project allows you to download the entire groupme group chat into a csv file, which includes Name, Date, Message, Like Count, User Id, and Liked by (list of user_id(s)) (```export_groupme_stat.py```)
+
+I also provided some examples on how you can use the csv file to get the stats 
+
+### Get group id: 
+
+```
+curl -s -H "X-Access-Token: YOUR_ACCESS_TOKEN" "https://api.groupme.com/v3/groups" | jq '.response[] | select(.name=="Group_Name") | .id'
+```
+
+### Get Access Token:
+
+[Developer Portal](https://dev.groupme.com/)
+
+### File description
+
+```export_groupme_stat.py``` download the entire group converation into a csv file which includes Name, Date, Message, Like Count, User Id, and Liked by (list of user_id(s))
 
 ```total_message.py``` give top 30 people who have the most message sent
 
