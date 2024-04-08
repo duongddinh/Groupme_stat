@@ -36,4 +36,6 @@ curl -s -H "X-Access-Token: YOUR_ACCESS_TOKEN" "https://api.groupme.com/v3/group
 
 ```NickNameChangeAndDate.py``` Shows top 10 most changed nickname and give total messages for each month and year
 
+```removed_user.py``` Shows the top 10 users got removed from the groupchat the most
+
 Create a pull request or an issue to request more/diff stats
