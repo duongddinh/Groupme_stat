@@ -51,17 +51,20 @@ def save_messages_to_csv(messages, filename):
     try:
         with open(filename, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(['Name', 'Date', 'Message', 'Like Count', 'User ID', 'Liked By', 'Attachments'])
+            # Include 'Time' column header
+            writer.writerow(['Name', 'Date', 'Time', 'Message', 'Like Count', 'User ID', 'Liked By', 'Attachments'])
 
             for msg in messages:
-                name = msg['name']
-                created_at = datetime.fromtimestamp(msg['created_at']).strftime('%m/%d/%Y')
-                text = msg['text']
-                like_count = len(msg['favorited_by'])
-                user_id = msg['user_id']
-                liked_by = ','.join(msg['favorited_by'])
-                attachments = ';'.join([att['url'] for att in msg['attachments'] if 'url' in att])  
-                writer.writerow([name, created_at, text, like_count, user_id, liked_by, attachments])
+                name = msg.get('name', '')
+                # Split the timestamp into date and time
+                created_at_date = datetime.fromtimestamp(msg['created_at']).strftime('%m/%d/%Y')
+                created_at_time = datetime.fromtimestamp(msg['created_at']).strftime('%H:%M:%S')
+                text = msg.get('text', '')
+                like_count = len(msg.get('favorited_by', []))
+                user_id = msg.get('user_id', '')
+                liked_by = ','.join(msg.get('favorited_by', []))
+                attachments = ';'.join([att['url'] for att in msg.get('attachments', []) if 'url' in att])
+                writer.writerow([name, created_at_date, created_at_time, text, like_count, user_id, liked_by, attachments])
     except Exception as e:
         print(f"Failed to save messages: {e}")
 
