@@ -32,4 +32,6 @@ curl -s -H "X-Access-Token: YOUR_ACCESS_TOKEN" "https://api.groupme.com/v3/group
 
 ```GraphicalData.ipynb``` Make the graph for all these data in google colab and jupyter notebook
 
+```moreStat.py``` give the percentage of messages that have 0 likes and the message that has the most likes
+
 Create a pull request or an issue to request more/diff stats
