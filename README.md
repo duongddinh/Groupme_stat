@@ -1,4 +1,4 @@
-# Groupme stat
+# Groupme stat & CSV Exporter
 Most Comprehensive GroupMe Group Chat CSV Generator
 
 This project enables you to download the entire GroupMe group chat into a CSV file. The file includes columns for Name, Date, Message, Like Count, User ID, Time, Liked By (a list of user IDs), and Attachments (via ```export_groupme_stat.py```).
