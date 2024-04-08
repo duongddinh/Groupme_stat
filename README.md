@@ -5,6 +5,28 @@ This project allows you to download the entire groupme group chat into a csv fil
 
 I also provided some examples on how you can use the csv file to get the stats 
 
+## Dependencies:
+
+```python3```
+
+```python
+import requests
+import csv
+import time
+import sys
+from datetime import datetime
+import pandas as pd
+import requests
+import json
+from ast import literal_eval
+import matplotlib.pyplot as plt
+import emoji
+import re
+
+```
+
+do ```pip3 install [Name]```
+
 ### Get group id: 
 
 ```
