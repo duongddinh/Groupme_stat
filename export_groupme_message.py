@@ -23,7 +23,6 @@ def fetch_messages(group_id, access_token):
             response.raise_for_status()  # Check for HTTP errors
             batch = response.json()['response']['messages']
         except requests.exceptions.HTTPError as http_err:
-            # Handle common rate limiting error
             if response.status_code == 429:
                 print("Rate limit exceeded. Waiting 60 seconds before retrying...")
                 time.sleep(60)
@@ -51,20 +50,20 @@ def save_messages_to_csv(messages, filename):
     try:
         with open(filename, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            # Include 'Time' column header
-            writer.writerow(['Name', 'Date', 'Time', 'Message', 'Like Count', 'User ID', 'Liked By', 'Attachments'])
+            writer.writerow(['Name', 'Date', 'Time', 'Message', 'Like Count', 'User ID', 'Liked By', 'Attachments', 'Profile Picture', 'System'])
 
             for msg in messages:
                 name = msg.get('name', '')
-                # Split the timestamp into date and time
                 created_at_date = datetime.fromtimestamp(msg['created_at']).strftime('%m/%d/%Y')
                 created_at_time = datetime.fromtimestamp(msg['created_at']).strftime('%H:%M:%S')
                 text = msg.get('text', '')
                 like_count = len(msg.get('favorited_by', []))
-                user_id = msg.get('user_id', '')
+                user_id = msg.get('user_id', 'Unknown')
                 liked_by = ','.join(msg.get('favorited_by', []))
                 attachments = ';'.join([att['url'] for att in msg.get('attachments', []) if 'url' in att])
-                writer.writerow([name, created_at_date, created_at_time, text, like_count, user_id, liked_by, attachments])
+                profile_picture = msg.get('avatar_url', 'No picture')  
+                system = msg.get('system', False)
+                writer.writerow([name, created_at_date, created_at_time, text, like_count, user_id, liked_by, attachments, profile_picture, system])
     except Exception as e:
         print(f"Failed to save messages: {e}")
 
