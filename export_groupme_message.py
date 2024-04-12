@@ -50,7 +50,7 @@ def save_messages_to_csv(messages, filename):
     try:
         with open(filename, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(['Name', 'Date', 'Time', 'Message', 'Like Count', 'User ID', 'Liked By', 'Attachments', 'Profile Picture', 'System'])
+            writer.writerow(['Name', 'Date', 'Time', 'Message', 'Like Count', 'User ID', 'Liked By', 'Attachments', 'Profile Picture', 'Mention' ,'System'])
 
             for msg in messages:
                 name = msg.get('name', '')
@@ -60,10 +60,19 @@ def save_messages_to_csv(messages, filename):
                 like_count = len(msg.get('favorited_by', []))
                 user_id = msg.get('user_id', 'Unknown')
                 liked_by = ','.join(msg.get('favorited_by', []))
-                attachments = ';'.join([att['url'] for att in msg.get('attachments', []) if 'url' in att])
-                profile_picture = msg.get('avatar_url', 'No picture')  
+                attachments = ' , '.join([att['url'] for att in msg.get('attachments', []) if 'url' in att])
+                profile_picture = msg.get('avatar_url', 'No picture')
+                try: 
+                    mentioned = ','.join(
+                        [str(uid) for attachment in msg.get('attachments', [])
+                         if attachment['type'] == 'mentions'
+                         for uid in attachment.get('user_ids', [])]
+                    )
+                except Exception as e2:
+                    mentioned = 'Unknown'
+
                 system = msg.get('system', False)
-                writer.writerow([name, created_at_date, created_at_time, text, like_count, user_id, liked_by, attachments, profile_picture, system])
+                writer.writerow([name, created_at_date, created_at_time, text, like_count, user_id, liked_by, attachments, profile_picture, mentioned, system])
     except Exception as e:
         print(f"Failed to save messages: {e}")
 
